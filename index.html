@@ -1,265 +1,368 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>מעקב בריאות יומי - תזונה ותרופות</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מעקב בריאות יומי</title>
+    <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="מעקב בריאות">
-    <meta name="theme-color" content="#667eea">
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0i四十IiBmaWxsPSJ1cmwoI2dyYWRpZW50MF9saW5lYXIpIi8+CjxzdmcgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwPjwmI2Q3Zjg2YmY7PC9wPgo8cD4mI2Q3ZjhkODc7PC9wPgo8L3N2Zz4KPHNkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXIiIHgxPSIwIiB5MT0iMC edades4wIiB4Mj0iMTgwIiB5Mj0iMTgwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvZGVmcz4KPC9zdmc+Cg==">
-    
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIteZ16LXp9eRINeR16jXmdeQ15XXqiIsCiAgInNob3J0X25hbWUiOiAi157XoteT16AgvtCx16jXmdeQ15XXqiIsCiAgImRlc2NyaXB0aW9uIjogIteU16DXlteU15HXnCDXqNeq15bVv9eV16TXlCDXVnNldNeq16jXnteR15XXqiIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjNjY3ZWVhIiwKICAidGhlbWVfY29sb3IiOiAiIzY2N2VlYSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU1UZ3dJaUJvWldsbmFIUTlJakU0TUNJaWRtbGxkMEp2ZUQwaU1DQXdJREU0TUNBeE9EQWlJR1pwYkd3OUltNXZibVVpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrQ2p4eVpXTjBJSGRwWkhSb1BTSXhPREFpSUdobGFXZG9kRDBpTVRnd0lpQnllRDBpTkRBaUlHWnBiR3c5SW5WeWJDZ2paM0poWkdsbGJuUXdYMnhwYm1WaGNpa2lMejRLUEhOMlp5QjRQU0kwTUNJaWVUMGlOREFpSUhkcFpIUm9QU0l4TURBaUlHaGxhV2RvZEQwaU1UQXdJaUIyYVdWM1FtOTRQU0l3SURBZ01qUWdNalFpSUdacGJHdzlJbmRvYVhSbElqNEtjR2c0MXBG25NOREVxV0tId3Y4SitJOGJEd3M=IiwKICAgICAgInNpemVzIjogIjE4MHgxODAiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        h1, h2 {
+            color: #0056b3;
+            text-align: center;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="time"],
+        select,
+        textarea {
+            width: calc(100% - 22px); /* Adjusting for padding and border */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
             box-sizing: border-box;
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
+        button:hover {
+            background-color: #0056b3;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .header h1 {
-            color: #4a5568;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header p {
-            color: #718096;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .card h2 {
-            color: #4a5568;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #4a5568;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            width: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .medication-entry {
-            background: #f7fafc;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-right: 4px solid #667eea;
-        }
-
-        .medication-header {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr auto;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .remove-btn {
-            background: #e53e3e;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: background 0.2s ease;
-        }
-
-        .remove-btn:hover {
-            background: #c53030;
-        }
-
-        .add-medication-btn {
-            background: #38a169;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 15px;
-            transition: background 0.2s ease;
-        }
-
-        .add-medication-btn:hover {
-            background: #2f855a;
-        }
-
-        .success-message {
-            background: #c6f6d5;
-            color: #22543d;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-right: 4px solid #38a169;
-            display: none;
-        }
-
-        .error-message {
-            background: #fed7d7;
-            color: #742a2a;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-right: 4px solid #e53e3e;
-            display: none;
-        }
-
-        .stats-card {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .message {
             margin-top: 20px;
-        }
-
-        .stat-item {
+            padding: 10px;
+            border-radius: 4px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        #medicationForm {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .medication-entry {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .medication-entry button {
+            width: auto;
+            margin-top: 10px;
+            background-color: #dc3545;
+        }
+        .medication-entry button:hover {
+            background-color: #c82333;
+        }
+        #addMedicationBtn {
+            background-color: #28a745;
+            margin-top: 15px;
+        }
+        #addMedicationBtn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>מעקב בריאות יומי</h1>
+
+        <h2>רישום ארוחה</h2>
+        <form id="nutritionForm">
+            <div>
+                <label for="mealType">סוג ארוחה:</label>
+                <select id="mealType" required>
+                    <option value="">בחר סוג ארוחה</option>
+                    <option value="ארוחת בוקר">ארוחת בוקר</option>
+                    <option value="ארוחת צהריים">ארוחת צהריים</option>
+                    <option value="ארוחת ערב">ארוחת ערב</option>
+                    <option value="ארוחת ביניים">ארוחת ביניים</option>
+                    <option value="חטיף">חטיף</option>
+                    <option value="שתיה">שתיה</option>
+                </select>
+            </div>
+            <div>
+                <label for="mealDescription">תיאור הארוחה:</label>
+                <textarea id="mealDescription" rows="3" required></textarea>
+            </div>
+            <button type="submit">רשום ארוחה</button>
+            <div id="nutritionMessage" class="message" style="display:none;"></div>
+        </form>
+
+        <hr>
+
+        <h2>רישום תרופות</h2>
+        <form id="medicationForm">
+            <div id="medicationsContainer">
+                </div>
+            <button type="button" id="addMedicationBtn">הוסף תרופה</button>
+            <button type="submit">רשום תרופות</button>
+            <div id="medicationMessage" class="message" style="display:none;"></div>
+        </form>
+    </div>
+
+    <script>
+        // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+        const SCRIPT_URL = 'YOUR_DEPLOYED_WEB_APP_URL_HERE'; 
+
+        // Function to get current date and time in Israel's timezone
+        function getCurrentDateTime() {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+                timeZone: 'Asia/Jerusalem' // Israel's timezone
+            };
+            const formatter = new Intl.DateTimeFormat('he-IL', options);
+            const parts = formatter.formatToParts(now);
+
+            let date = '';
+            let time = '';
+
+            // Extract parts manually to ensure correct order (DD/MM/YYYY and HH:MM:SS)
+            const day = parts.find(p => p.type === 'day').value;
+            const month = parts.find(p => p.type === 'month').value;
+            const year = parts.find(p => p.type === 'year').value;
+            const hour = parts.find(p => p.type === 'hour').value;
+            const minute = parts.find(p => p.type === 'minute').value;
+            const second = parts.find(p => p.type === 'second').value;
+
+            date = `${day}/${month}/${year}`;
+            time = `${hour}:${minute}:${second}`;
+
+            return { date, time };
         }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+        // Helper function to display messages
+        function displayMessage(elementId, message, type) {
+            const messageElement = document.getElementById(elementId);
+            messageElement.textContent = message;
+            messageElement.className = `message ${type}`;
+            messageElement.style.display = 'block';
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 5000); // Hide after 5 seconds
         }
 
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        // --- Nutrition Form Handling ---
+        document.getElementById('nutritionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const { date, time } = getCurrentDateTime();
+            const mealType = document.getElementById('mealType').value;
+            const mealDescription = document.getElementById('mealDescription').value;
+
+            const data = {
+                type: 'nutrition',
+                date: date,
+                time: time,
+                data: {
+                    mealType: mealType,
+                    mealDescription: mealDescription
+                    // Removed: quantity, calories, notes as per "Option B"
+                }
+            };
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Google Apps Script Web App
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                // Since 'no-cors' is used, we can't inspect the response directly.
+                // Assume success if no network error.
+                displayMessage('nutritionMessage', 'הארוחה נרשמה בהצלחה!', 'success');
+                this.reset(); // Clear the form
+            } catch (error) {
+                console.error('Error:', error);
+                displayMessage('nutritionMessage', 'שגיאה ברישום הארוחה. נסה שוב.', 'error');
+            }
+        });
+
+        // --- Medication Form Handling ---
+        const medicationsContainer = document.getElementById('medicationsContainer');
+        let medicationCounter = 0;
+
+        function addMedicationEntry(medication = {}) {
+            medicationCounter++;
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'medication-entry';
+            entryDiv.dataset.id = medicationCounter;
+            entryDiv.innerHTML = `
+                <div>
+                    <label for="medName-${medicationCounter}">שם תרופה:</label>
+                    <select id="medName-${medicationCounter}" required>
+                        <option value="">בחר תרופה</option>
+                        <option value="לוריוון">לוריוון</option>
+                        <option value="נורופן">נורופן</option>
+                        <option value="אופטלגין">אופטלגין</option>
+                        <option value="ויטמין D">ויטמין D</option>
+                        <option value="B12">B12</option>
+                        <option value="פרוביוטיקה">פרוביוטיקה</option>
+                        <option value="אחר">אחר (ציין בהערות)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="medDosage-${medicationCounter}">מינון:</label>
+                    <input type="text" id="medDosage-${medicationCounter}" placeholder="לדוגמה: 25 מ"ג, 2 כדורים" value="${medication.dosage || ''}" required>
+                </div>
+                <div>
+                    <label for="medTime-${medicationCounter}">שעת נטילה (אופציונלי):</label>
+                    <input type="time" id="medTime-${medicationCounter}" value="${medication.time || ''}">
+                </div>
+                <div>
+                    <label for="medNotes-${medicationCounter}">הערות (אופציונלי):</label>
+                    <textarea id="medNotes-${medicationCounter}" rows="2" placeholder="הערות נוספות">${medication.notes || ''}</textarea>
+                </div>
+                <button type="button" class="remove-medication-btn">הסר תרופה</button>
+            `;
+            medicationsContainer.appendChild(entryDiv);
+
+            entryDiv.querySelector('.remove-medication-btn').addEventListener('click', () => {
+                entryDiv.remove();
+            });
         }
 
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
+        // Add initial medication entry on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addMedicationEntry(); // Add one empty entry
+        });
+
+        document.getElementById('addMedicationBtn').addEventListener('click', () => {
+            addMedicationEntry();
+        });
+
+        document.getElementById('medicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const { date, time } = getCurrentDateTime();
+            const medications = [];
+            const medicationEntries = medicationsContainer.querySelectorAll('.medication-entry');
+
+            if (medicationEntries.length === 0) {
+                displayMessage('medicationMessage', 'אנא הוסף לפחות תרופה אחת.', 'error');
+                return;
             }
-            
-            .form-row {
-                grid-template-columns: 1fr;
+
+            let allFieldsFilled = true;
+            medicationEntries.forEach(entry => {
+                const id = entry.dataset.id;
+                const name = document.getElementById(`medName-${id}`).value;
+                const dosage = document.getElementById(`medDosage-${id}`).value;
+                const medTime = document.getElementById(`medTime-${id}`).value;
+                const notes = document.getElementById(`medNotes-${id}`).value;
+
+                if (!name || !dosage) { // Name and dosage are required
+                    allFieldsFilled = false;
+                }
+
+                medications.push({
+                    name: name,
+                    dosage: dosage,
+                    time: medTime,
+                    notes: notes
+                });
+            });
+
+            if (!allFieldsFilled) {
+                displayMessage('medicationMessage', 'אנא מלא את כל השדות הנדרשים (שם תרופה ומינון).', 'error');
+                return;
             }
-            
-            .medication-header {
-                grid-template-columns: 1fr;
-                gap: 5px;
+
+            const data = {
+                type: 'medication',
+                date: date,
+                time: time,
+                data: {
+                    medications: medications
+                }
+            };
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                displayMessage('medicationMessage', 'התרופות נרשמו בהצלחה!', 'success');
+                // Clear all medication entries and add one new empty one
+                medicationsContainer.innerHTML = '';
+                addMedicationEntry();
+            } catch (error) {
+                console.error('Error:', error);
+                displayMessage('medicationMessage', 'שגיאה ברישום התרופות. נסה שוב.', 'error');
             }
-            
-            .header h
+        });
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/daily-health-tracker/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
