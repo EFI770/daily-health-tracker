@@ -1,367 +1,1016 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מעקב בריאות יומי</title>
-    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>מעקב בריאות יומי - תרופות</title>
+    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="מעקב בריאות">
-    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+    <meta name="theme-color" content="#667eea">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhciciLz4KPHN2ZyB4PSI0MCIgeT0iNDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IndoaXRlIj4KPHA+8J+SizwvcD4KPC9zdmc+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXIiIHgxPSIwIiB5MT0iMCIgeDI9IjE4MCIyeTI9IjE4MCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjNjY3ZWVhIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzc2NGJhMiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            direction: rtl;
-            text-align: right;
+        /* ה-CSS נשאר ללא שינוי, אך כלול לשלמות */
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 20px auto;
-        }
-        h1, h2 {
-            color: #0056b3;
-            text-align: center;
-        }
-        form div {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        input[type="time"],
-        select,
-        textarea {
-            width: calc(100% - 22px); /* Adjusting for padding and border */
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
+            padding: 0;
             box-sizing: border-box;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        .message {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 4px;
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
             text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-        .message.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        #medicationForm {
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-        .medication-entry {
-            border: 1px solid #ddd;
-            padding: 15px;
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
             margin-bottom: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .medication-entry button {
-            width: auto;
-            margin-top: 10px;
-            background-color: #dc3545;
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
         }
-        .medication-entry button:hover {
-            background-color: #c82333;
+
+        .connection-status {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-right: 4px solid #38a169;
         }
-        #addMedicationBtn {
-            background-color: #28a745;
-            margin-top: 15px;
+
+        .connection-status.disconnected {
+            border-right: 4px solid #e53e3e;
         }
-        #addMedicationBtn:hover {
-            background-color: #218838;
+
+        .connection-status h3 {
+            margin-bottom: 10px;
+            color: #4a5568;
+        }
+
+        .firebase-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .firebase-status.connected {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #38a169;
+        }
+
+        .firebase-status.disconnected {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #e53e3e;
+        }
+
+        .firebase-status.loading {
+            background: #fef5e7;
+            color: #744210;
+            border: 2px solid #ed8936;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .medication-entry {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-right: 4px solid #667eea;
+        }
+
+        .medication-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .remove-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.2s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c53030;
+        }
+
+        .add-medication-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background 0.2s ease;
+        }
+
+        .add-medication-btn:hover {
+            background: #2f855a;
+        }
+
+        .success-message {
+            background: #c6f6d5;
+            color: #22543d;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-right: 4px solid #38a169;
+            display: none;
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: #742a2a;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-right: 4px solid #e53e3e;
+            display: none;
+        }
+
+        .warning-message {
+            background: #fef5e7;
+            color: #744210;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-right: 4px solid #ed8936;
+            display: none;
+        }
+
+        .stats-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .data-table-card {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+
+        .month-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+
+        .month-selector select {
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 12px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .data-table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:hover {
+            background: #f7fafc;
+        }
+
+        .medication-name {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .dosage-badge {
+            background: #e6fffa;
+            color: #234e52;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .time-badge {
+            background: #ede9fe;
+            color: #553c9a;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 4px solid #667eea;
+        }
+
+        .summary-card h4 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .summary-card .number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .medication-header {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>מעקב בריאות יומי</h1>
+        <div class="header floating-animation">
+            <h1>💊 מעקב בריאות</h1>
+            <p>ניהול תרופות בצורה חכמה ומסודרת</p>
+        </div>
 
-        <h2>רישום ארוחה</h2>
-        <form id="nutritionForm">
-            <div>
-                <label for="mealType">סוג ארוחה:</label>
-                <select id="mealType" required>
-                    <option value="">בחר סוג ארוחה</option>
-                    <option value="ארוחת בוקר">ארוחת בוקר</option>
-                    <option value="ארוחת צהריים">ארוחת צהריים</option>
-                    <option value="ארוחת ערב">ארוחת ערב</option>
-                    <option value="ארוחת ביניים">ארוחת ביניים</option>
-                    <option value="חטיף">חטיף</option>
-                    <option value="שתיה">שתיה</option>
-                </select>
+        <div class="connection-status" id="connectionStatus">
+            <h3>🔥 חיבור ל-Firebase</h3>
+            <div class="firebase-status loading" id="firebaseStatus">
+                <span class="loading-spinner"></span>מתחבר ל-Firebase...
             </div>
-            <div>
-                <label for="mealDescription">תיאור הארוחה:</label>
-                <textarea id="mealDescription" rows="3" required></textarea>
+            <div id="connectionMessage"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>💊 מעקב תרופות</h2>
+                <form id="medicationForm">
+                    <button type="button" class="add-medication-btn" onclick="addMedicationEntry()">+ הוסף תרופה</button>
+                    <div id="medicationsContainer">
+                        <div class="medication-entry">
+                            <div class="medication-header">
+                                <input type="text" name="medicationName[]" placeholder="שם התרופה" required>
+                                <input type="text" name="dosage[]" placeholder="מינון" required>
+                                <input type="time" name="time[]" required>
+                                <button type="button" class="remove-btn" onclick="removeMedicationEntry(this)" style="display: none;">×</button>
+                            </div>
+                            <div class="form-group">
+                                <label>הערות לתרופה:</label>
+                                <input type="text" name="medicationNotes[]" placeholder="הערות נוספות...">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="medicationSubmitBtn">רשום תרופות</button>
+                </form>
+                <div id="medicationSuccess" class="success-message">התרופות נרשמו בהצלחה!</div>
+                <div id="medicationError" class="error-message">שגיאה ברישום התרופות. נסה שוב.</div>
             </div>
-            <button type="submit">רשום ארוחה</button>
-            <div id="nutritionMessage" class="message" style="display:none;"></div>
-        </form>
 
-        <hr>
-
-        <h2>רישום תרופות</h2>
-        <form id="medicationForm">
-            <div id="medicationsContainer">
+            <div class="card">
+                <h2>📊 סטטיסטיקות</h2>
+                <div class="stats-grid">
+                    <div class="stat-item pulse-animation">
+                        <div class="stat-number" id="todayMedications">0</div>
+                        <div class="stat-label">תרופות היום</div>
+                    </div>
+                    <div class="stat-item pulse-animation">
+                        <div class="stat-number" id="weekMedications">0</div>
+                        <div class="stat-label">תרופות השבוע</div>
+                    </div>
+                    <div class="stat-item pulse-animation">
+                        <div class="stat-number" id="totalMedications">0</div>
+                        <div class="stat-label">סה"כ תרופות</div>
+                    </div>
                 </div>
-            <button type="button" id="addMedicationBtn">הוסף תרופה</button>
-            <button type="submit">רשום תרופות</button>
-            <div id="medicationMessage" class="message" style="display:none;"></div>
-        </form>
+            </div>
+        </div>
+
+        <div class="card data-table-card">
+            <h2>📋 היסטוריית תרופות</h2>
+            
+            <div class="month-selector">
+                <label>בחר חודש:</label>
+                <select id="monthSelector" onchange="filterDataByMonth()">
+                    <option value="all">כל החודשים</option>
+                </select>
+                <button class="add-medication-btn" onclick="exportToCSV()">ייצא ל-CSV</button>
+            </div>
+
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h4>תרופות בחודש הנבחר</h4>
+                    <div class="number" id="monthlyMedicationCount">0</div>
+                </div>
+                <div class="summary-card">
+                    <h4>תרופות שונות</h4>
+                    <div class="number" id="uniqueMedicationCount">0</div>
+                </div>
+            </div>
+
+            <div id="medicationTableContainer">
+                <table class="data-table" id="medicationTable">
+                    <thead>
+                        <tr>
+                            <th>תאריך</th>
+                            <th>שעה</th>
+                            <th>שם התרופה</th>
+                            <th>מינון</th>
+                            <th>שעת נטילה</th>
+                            <th>הערות</th>
+                        </tr>
+                    </thead>
+                    <tbody id="medicationTableBody">
+                        </tbody>
+                </table>
+                <div class="empty-state" id="medicationEmptyState" style="display: none;">
+                    <div class="empty-state-icon">💊</div>
+                    <p>אין נתוני תרופות לתצוגה</p>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script>
-        // זהו ה-URL המלא והמדויק של פריסת ה-Web App שלך ב-Google Apps Script.
-        // הוא יחבר את האפליקציה ב-GitHub Pages לסקריפט שלך.
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuH8mGMKmACUftZTaGWbm0ipIRNVYCPwH_CVFaZsE8gOJVP_PJ_fW22-ZMAdksQ1UL/exec'; 
+        // תצורת Firebase - החלף עם הפרטים שלך מה-Firebase Console
+        const firebaseConfig = {
+          apiKey: "AIzaSyCWUNPjMMSnGhPJq2hxgVBdypmcmGV112k",
+          authDomain: "health-tracker-app-9ebbb.firebaseapp.com",
+          projectId: "health-tracker-app-9ebbb",
+          storageBucket: "health-tracker-app-9ebbb.firebasestorage.app",
+          messagingSenderId: "728972555652",
+          appId: "1:728972555652:web:cb593d8fe96fc96fcad9d1"
+        };
 
-        // Function to get current date and time in Israel's timezone
-        function getCurrentDateTime() {
+        // אתחול Firebase
+        let db;
+        let isFirebaseConnected = false;
+        try {
+          firebase.initializeApp(firebaseConfig);
+          db = firebase.firestore();
+          isFirebaseConnected = true;
+          updateFirebaseStatus('connected', '🔥 מחובר ל-Firebase');
+        } catch (error) {
+          console.error('שגיאה באתחול Firebase:', error);
+          updateFirebaseStatus('disconnected', '❌ שגיאה בחיבור ל-Firebase');
+        }
+
+        function updateFirebaseStatus(status, message) {
+          const statusElement = document.getElementById('firebaseStatus');
+          statusElement.className = `firebase-status ${status}`;
+          statusElement.innerHTML = message;
+            
+          const connectionStatus = document.getElementById('connectionStatus');
+          if (status === 'connected') {
+            connectionStatus.classList.remove('disconnected');
+          } else {
+            connectionStatus.classList.add('disconnected');
+          }
+        }
+
+        // אתחול האפליקציה
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMedicationData();
+            populateMonthSelector();
+            
+            // הגדרת השעה הנוכחית עבור רשומות תרופות
+            const timeInputs = document.querySelectorAll('input[type="time"]');
             const now = new Date();
-            const options = {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false,
-                timeZone: 'Asia/Jerusalem' // Israel's timezone
-            };
-            const formatter = new Intl.DateTimeFormat('he-IL', options);
-            const parts = formatter.formatToParts(now);
-
-            let date = '';
-            let time = '';
-
-            // Extract parts manually to ensure correct order (DD/MM/YYYY and HH:MM:SS)
-            const day = parts.find(p => p.type === 'day').value;
-            const month = parts.find(p => p.type === 'month').value;
-            const year = parts.find(p => p.type === 'year').value;
-            const hour = parts.find(p => p.type === 'hour').value;
-            const minute = parts.find(p => p.type === 'minute').value;
-            const second = parts.find(p => p.type === 'second').value;
-
-            date = `${day}/${month}/${year}`;
-            time = `${hour}:${minute}:${second}`;
-
-            return { date, time };
-        }
-
-        // Helper function to display messages
-        function displayMessage(elementId, message, type) {
-            const messageElement = document.getElementById(elementId);
-            messageElement.textContent = message;
-            messageElement.className = `message ${type}`;
-            messageElement.style.display = 'block';
-            setTimeout(() => {
-                messageElement.style.display = 'none';
-            }, 5000); // Hide after 5 seconds
-        }
-
-        // --- Nutrition Form Handling ---
-        document.getElementById('nutritionForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const { date, time } = getCurrentDateTime();
-            const mealType = document.getElementById('mealType').value;
-            const mealDescription = document.getElementById('mealDescription').value;
-
-            const data = {
-                type: 'nutrition',
-                date: date,
-                time: time,
-                data: {
-                    mealType: mealType,
-                    mealDescription: mealDescription
+            const timeString = now.toTimeString().slice(0, 5);
+            timeInputs.forEach(input => {
+                if (!input.value) {
+                    input.value = timeString;
                 }
-            };
-
-            try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Required for Google Apps Script Web App
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                // Since 'no-cors' is used, we can't inspect the response directly.
-                // Assume success if no network error.
-                displayMessage('nutritionMessage', 'הארוחה נרשמה בהצלחה!', 'success');
-                this.reset(); // Clear the form
-            } catch (error) {
-                console.error('Error:', error);
-                displayMessage('nutritionMessage', 'שגיאה ברישום הארוחה. נסה שוב.', 'error');
+            });
+            // ודא שכפתור ההסרה מוסתר עבור הרשומה הראשונה בעת הטעינה
+            const firstRemoveBtn = document.querySelector('.medication-entry .remove-btn');
+            if (firstRemoveBtn) {
+                firstRemoveBtn.style.display = 'none';
             }
         });
 
-        // --- Medication Form Handling ---
-        const medicationsContainer = document.getElementById('medicationsContainer');
-        let medicationCounter = 0;
-
-        function addMedicationEntry(medication = {}) {
-            medicationCounter++;
-            const entryDiv = document.createElement('div');
-            entryDiv.className = 'medication-entry';
-            entryDiv.dataset.id = medicationCounter;
-            entryDiv.innerHTML = `
-                <div>
-                    <label for="medName-${medicationCounter}">שם תרופה:</label>
-                    <select id="medName-${medicationCounter}" required>
-                        <option value="">בחר תרופה</option>
-                        <option value="לוריוון">לוריוון</option>
-                        <option value="נורופן">נורופן</option>
-                        <option value="אופטלגין">אופטלגין</option>
-                        <option value="ויטמין D">ויטמין D</option>
-                        <option value="B12">B12</option>
-                        <option value="פרוביוטיקה">פרוביוטיקה</option>
-                        <option value="אחר">אחר (ציין בהערות)</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="medDosage-${medicationCounter}">מינון:</label>
-                    <input type="text" id="medDosage-${medicationCounter}" placeholder="לדוגמה: 25 מ&quot;ג, 2 כדורים" value="${medication.dosage || ''}" required>
-                </div>
-                <div>
-                    <label for="medTime-${medicationCounter}">שעת נטילה (אופציונלי):</label>
-                    <input type="time" id="medTime-${medicationCounter}" value="${medication.time || ''}">
-                </div>
-                <div>
-                    <label for="medNotes-${medicationCounter}">הערות (אופציונלי):</label>
-                    <textarea id="medNotes-${medicationCounter}" rows="2" placeholder="הערות נוספות">${medication.notes || ''}</textarea>
-                </div>
-                <button type="button" class="remove-medication-btn">הסר תרופה</button>
-            `;
-            medicationsContainer.appendChild(entryDiv);
-
-            entryDiv.querySelector('.remove-medication-btn').addEventListener('click', () => {
-                entryDiv.remove();
-            });
-        }
-
-        // Add initial medication entry on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            addMedicationEntry(); // Add one empty entry
-        });
-
-        document.getElementById('addMedicationBtn').addEventListener('click', () => {
-            addMedicationEntry();
-        });
-
+        // טיפול בטופס התרופות
         document.getElementById('medicationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            const { date, time } = getCurrentDateTime();
-            const medications = [];
-            const medicationEntries = medicationsContainer.querySelectorAll('.medication-entry');
-
-            if (medicationEntries.length === 0) {
-                displayMessage('medicationMessage', 'אנא הוסף לפחות תרופה אחת.', 'error');
-                return;
-            }
-
-            let allFieldsFilled = true;
-            medicationEntries.forEach(entry => {
-                const id = entry.dataset.id;
-                const name = document.getElementById(`medName-${id}`).value;
-                const dosage = document.getElementById(`medDosage-${id}`).value;
-                const medTime = document.getElementById(`medTime-${id}`).value;
-                const notes = document.getElementById(`medNotes-${id}`).value;
-
-                if (!name || !dosage) { // Name and dosage are required
-                    allFieldsFilled = false;
-                }
-
-                medications.push({
-                    name: name,
-                    dosage: dosage,
-                    time: medTime,
-                    notes: notes
-                });
-            });
-
-            if (!allFieldsFilled) {
-                displayMessage('medicationMessage', 'אנא מלא את כל השדות הנדרשים (שם תרופה ומינון).', 'error');
-                return;
-            }
-
-            const data = {
-                type: 'medication',
-                date: date,
-                time: time,
-                data: {
-                    medications: medications
-                }
-            };
-
+            
+            const submitBtn = document.getElementById('medicationSubmitBtn');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> שומר...';
+            
             try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                displayMessage('medicationMessage', 'התרופות נרשמו בהצלחה!', 'success');
-                // Clear all medication entries and add one new empty one
-                medicationsContainer.innerHTML = '';
-                addMedicationEntry();
+                const formData = new FormData(this);
+                const medications = [];
+                
+                const names = formData.getAll('medicationName[]');
+                const dosages = formData.getAll('dosage[]');
+                const times = formData.getAll('time[]');
+                const notes = formData.getAll('medicationNotes[]');
+
+                for (let i = 0; i < names.length; i++) {
+                    if (names[i] && dosages[i] && times[i]) { // ודא ששדות חובה אינם ריקים
+                        medications.push({
+                            name: names[i],
+                            dosage: dosages[i],
+                            time: times[i], // שעת נטילה שהוזנה על ידי המשתמש
+                            notes: notes[i] || ''
+                        });
+                    }
+                }
+                
+                if (medications.length === 0) {
+                    throw new Error('לא נמצאו תרופות לשמירה. ודא ששדות שם התרופה, המינון ושעת הנטילה מלאים.');
+                }
+                
+                const now = new Date();
+                const medicationEntryData = { // שם שונה כדי למנוע התנגשות עם window.medicationData
+                    date: now.toLocaleDateString('he-IL'), // פורמט תאריך לתצוגה
+                    time: now.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' }), // פורמט שעה לתצוגה
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(), // חותמת זמן של שרת Firestore
+                    medications: medications
+                };
+                
+                if (isFirebaseConnected) {
+                    await db.collection('medications').add(medicationEntryData);
+                    showMessage('medicationSuccess', 'התרופות נרשמו בהצלחה ב-Firebase!');
+                } else {
+                    // חזרה לאחסון מקומי (localStorage)
+                    const localData = JSON.parse(localStorage.getItem('medicationData') || '[]');
+                    localData.push({
+                        ...medicationEntryData,
+                        timestamp: now.toISOString(), // השתמש בסטרינג ISO עבור חותמת זמן מקומית
+                        id: Date.now().toString() // ID פשוט עבור אחסון מקומי
+                    });
+                    localStorage.setItem('medicationData', JSON.stringify(localData));
+                    showMessage('medicationSuccess', 'התרופות נרשמו מקומית (לא מחובר ל-Firebase)');
+                }
+                
+                // איפוס הטופס וטעינת נתונים מחדש
+                this.reset();
+                resetMedicationForm(); // פונקציה מותאמת אישית לאיפוס מבנה הטופס
+                await loadMedicationData();
+                
             } catch (error) {
-                console.error('Error:', error);
-                displayMessage('medicationMessage', 'שגיאה ברישום התרופות. נסה שוב.', 'error');
+                console.error('שגיאה בשמירת תרופה:', error);
+                showMessage('medicationError', 'שגיאה ברישום התרופות: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             }
         });
 
-        // Register Service Worker for PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/daily-health-tracker/service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registered with scope:', registration.scope);
-                    })
-                    .catch(err => {
-                        console.log('Service Worker registration failed:', err);
+        // פונקציה להצגת הודעות
+        function showMessage(id, message) {
+            const element = document.getElementById(id);
+            element.textContent = message;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        // פונקציה לאיפוס טופס התרופות למצבו ההתחלתי
+        function resetMedicationForm() {
+            const container = document.getElementById('medicationsContainer');
+            container.innerHTML = `
+                <div class="medication-entry">
+                    <div class="medication-header">
+                        <input type="text" name="medicationName[]" placeholder="שם התרופה" required>
+                        <input type="text" name="dosage[]" placeholder="מינון" required>
+                        <input type="time" name="time[]" required>
+                        <button type="button" class="remove-btn" onclick="removeMedicationEntry(this)" style="display: none;">×</button>
+                    </div>
+                    <div class="form-group">
+                        <label>הערות לתרופה:</label>
+                        <input type="text" name="medicationNotes[]" placeholder="הערות נוספות...">
+                    </div>
+                </div>
+            `;
+            // הגדרת השעה הנוכחית עבור הקלט החדש
+            const timeInput = container.querySelector('input[type="time"]');
+            const now = new Date();
+            const currentTime = now.toTimeString().slice(0, 5);
+            if (!timeInput.value) {
+                timeInput.value = currentTime;
+            }
+        }
+
+        // הוספת רשומת תרופה
+        function addMedicationEntry() {
+            const container = document.getElementById('medicationsContainer');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'medication-entry';
+            newEntry.innerHTML = `
+                <div class="medication-header">
+                    <input type="text" name="medicationName[]" placeholder="שם התרופה" required>
+                    <input type="text" name="dosage[]" placeholder="מינון" required>
+                    <input type="time" name="time[]" required>
+                    <button type="button" class="remove-btn" onclick="removeMedicationEntry(this)">×</button>
+                </div>
+                <div class="form-group">
+                    <label>הערות לתרופה:</label>
+                    <input type="text" name="medicationNotes[]" placeholder="הערות נוספות...">
+                </div>
+            `;
+            container.appendChild(newEntry);
+            
+            // הצגת כפתורי הסרה עבור כל הרשומות (למעט הראשונה, שמטופלת על ידי display: none התחלתי)
+            const removeButtons = container.querySelectorAll('.remove-btn');
+            if (removeButtons.length > 1) { // הצג רק אם יש יותר מרשומה אחת
+                removeButtons.forEach(btn => btn.style.display = 'block');
+                removeButtons[0].style.display = 'none'; // השאר את הראשון מוסתר
+            }
+            
+            // הגדרת השעה הנוכחית עבור הקלט החדש
+            const timeInput = newEntry.querySelector('input[type="time"]');
+            const now = new Date();
+            const currentTime = now.toTimeString().slice(0, 5);
+            if (!timeInput.value) {
+                timeInput.value = currentTime;
+            }
+        }
+
+        // הסרת רשומת תרופה
+        function removeMedicationEntry(button) {
+            const container = document.getElementById('medicationsContainer');
+            if (container.children.length > 1) {
+                button.closest('.medication-entry').remove();
+            }
+            
+            // הערכה מחדש של נראות כפתור ההסרה לאחר ההסרה
+            const remainingEntries = container.querySelectorAll('.medication-entry');
+            if (remainingEntries.length === 1) {
+                remainingEntries[0].querySelector('.remove-btn').style.display = 'none';
+            } else {
+                remainingEntries.forEach(entry => entry.querySelector('.remove-btn').style.display = 'block');
+            }
+        }
+
+        // טעינת נתוני תרופות מ-Firebase או מ-Local Storage
+        async function loadMedicationData() {
+            try {
+                let allMedications = [];
+                
+                if (isFirebaseConnected) {
+                    const snapshot = await db.collection('medications')
+                        .orderBy('timestamp', 'desc')
+                        .get();
+                        
+                    allMedications = snapshot.docs.map(doc => {
+                        const data = doc.data();
+                        return {
+                            id: doc.id,
+                            ...data,
+                            // המרת חותמת זמן של Firestore לאובייקט Date אם קיים
+                            timestamp: data.timestamp?.toDate ? data.timestamp.toDate() : new Date(data.timestamp) 
+                        };
                     });
+                } else {
+                    // חזרה לאחסון מקומי (localStorage)
+                    allMedications = JSON.parse(localStorage.getItem('medicationData') || '[]')
+                        .map(item => ({
+                            ...item,
+                            timestamp: new Date(item.timestamp) // המרת סטרינג לאובייקט Date
+                        }))
+                        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // מיון נתונים מקומיים לפי חותמת זמן
+                }
+                
+                // שמירת הנתונים הטעונים באופן גלובלי עבור פונקציות אחרות
+                window.medicationData = allMedications;
+                
+                updateStatistics();
+                filterDataByMonth(); // הצגת נתונים על בסיס בורר החודש הנוכחי
+                populateMonthSelector();
+                
+            } catch (error) {
+                console.error('שגיאה בטעינת נתוני תרופות:', error);
+                showMessage('medicationError', 'שגיאה בטעינת הנתונים');
+            }
+        }
+
+        function updateStatistics() {
+            const data = window.medicationData || [];
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // תחילת היום
+
+            const sevenDaysAgo = new Date(today);
+            sevenDaysAgo.setDate(today.getDate() - 6); // 7 ימים אחורה כולל היום
+
+            let todayCount = 0;
+            let weekCount = 0;
+            let totalCount = 0;
+
+            data.forEach(entry => {
+                const entryTimestamp = new Date(entry.timestamp);
+                if (entryTimestamp >= today) {
+                    todayCount += entry.medications.length;
+                }
+                if (entryTimestamp >= sevenDaysAgo) {
+                    weekCount += entry.medications.length;
+                }
+                totalCount += entry.medications.length;
             });
+
+            document.getElementById('todayMedications').textContent = todayCount;
+            document.getElementById('weekMedications').textContent = weekCount;
+            document.getElementById('totalMedications').textContent = totalCount;
+        }
+
+        function displayMedicationData(dataToDisplay = window.medicationData) {
+            const tableBody = document.getElementById('medicationTableBody');
+            const emptyState = document.getElementById('medicationEmptyState');
+
+            // שיטוח הנתונים לתצוגה ומיון לפי חותמת זמן (העדכנית ביותר ראשונה)
+            const flattenedData = [];
+            dataToDisplay.forEach(entry => {
+                entry.medications.forEach(med => {
+                    flattenedData.push({
+                        date: entry.date,
+                        timeOfEntry: entry.time, // שעת הכניסה הכוללת
+                        name: med.name,
+                        dosage: med.dosage,
+                        takenTime: med.time, // שעת נטילת התרופה שהוזנה על ידי המשתמש
+                        notes: med.notes || '-',
+                        timestamp: entry.timestamp // השתמש בחותמת הזמן של הרשומה לצורך מיון
+                    });
+                });
+            });
+
+            flattenedData.sort((a, b) => b.timestamp - a.timestamp); // מיון לפי חותמת זמן יורדת
+
+            if (flattenedData.length === 0) {
+                tableBody.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            
+            let html = '';
+            flattenedData.forEach(item => {
+                html += `
+                    <tr>
+                        <td>${item.date}</td>
+                        <td>${item.timeOfEntry}</td>
+                        <td><span class="medication-name">${item.name}</span></td>
+                        <td><span class="dosage-badge">${item.dosage}</span></td>
+                        <td><span class="time-badge">${item.takenTime}</span></td>
+                        <td>${item.notes}</td>
+                    </tr>
+                `;
+            });
+            tableBody.innerHTML = html;
+        }
+
+        function populateMonthSelector() {
+            const selector = document.getElementById('monthSelector');
+            const data = window.medicationData || [];
+            const months = new Set();
+            
+            data.forEach(entry => {
+                const date = new Date(entry.timestamp);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                months.add(monthKey);
+            });
+            
+            // נקה אפשרויות קיימות למעט "כל החודשים"
+            selector.innerHTML = '<option value="all">כל החודשים</option>';
+            
+            // הוסף אפשרויות חודשים, ממוינות לפי שנה ולאחר מכן חודש (העדכני ביותר ראשון)
+            Array.from(months)
+                .sort((a, b) => {
+                    const [yearA, monthA] = a.split('-').map(Number);
+                    const [yearB, monthB] = b.split('-').map(Number);
+                    if (yearA !== yearB) return yearB - yearA; // מיון לפי שנה יורדת
+                    return monthB - monthA; // מיון לפי חודש יורד
+                })
+                .forEach(monthKey => {
+                    const [year, month] = monthKey.split('-');
+                    const monthName = new Date(year, month - 1).toLocaleDateString('he-IL', { 
+                        year: 'numeric', 
+                        month: 'long' 
+                    });
+                    
+                    const option = document.createElement('option');
+                    option.value = monthKey;
+                    option.textContent = monthName;
+                    selector.appendChild(option);
+                });
+        }
+
+        function filterDataByMonth() {
+            const selector = document.getElementById('monthSelector');
+            const selectedMonth = selector.value;
+            const data = window.medicationData || [];
+            
+            let filteredData = data;
+            
+            if (selectedMonth !== 'all') {
+                filteredData = data.filter(entry => {
+                    const date = new Date(entry.timestamp);
+                    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                    return monthKey === selectedMonth;
+                });
+            }
+            
+            // עדכון סטטיסטיקות חודשיות על בסיס הנתונים המסוננים
+            const monthlyCount = filteredData.reduce((sum, entry) => sum + entry.medications.length, 0);
+            const uniqueMeds = new Set();
+            filteredData.forEach(entry => {
+                entry.medications.forEach(med => uniqueMeds.add(med.name));
+            });
+            
+            document.getElementById('monthlyMedicationCount').textContent = monthlyCount;
+            document.getElementById('uniqueMedicationCount').textContent = uniqueMeds.size;
+            
+            // עדכון תצוגת הטבלה עם הנתונים המסוננים
+            displayMedicationData(filteredData);
+        }
+
+        // ייצוא נתונים ל-CSV
+        function exportToCSV() {
+            const dataToExport = window.medicationData || [];
+
+            if (dataToExport.length === 0) {
+                alert('אין נתונים לייצוא.');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF"; // הוסף BOM לתמיכה בעברית
+            csvContent += "תאריך,שעת רישום,שם התרופה,מינון,שעת נטילה,הערות\n"; // כותרות
+
+            // שיטוח מבנה הנתונים המקונן עבור CSV
+            dataToExport.forEach(entry => {
+                entry.medications.forEach(med => {
+                    const row = [
+                        entry.date,
+                        entry.time, // שעת הכניסה הכוללת
+                        med.name,
+                        med.dosage,
+                        med.time, // שעת נטילת התרופה שהוזנה על ידי המשתמש
+                        med.notes || ''
+                    ].map(field => `"${String(field).replace(/"/g, '""')}"`).join(','); // ברח גרשיים כפולים
+                    csvContent += row + "\n";
+                });
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "medication_data.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
