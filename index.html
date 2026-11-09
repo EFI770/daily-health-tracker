@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מעקב בריאות יומי - תרופות</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -472,6 +472,10 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+    /* Keep wide data tables scrollable inside their own panel. */
+        .data-section { min-width:0; }
+        .data-table { display:block; max-width:100%; overflow-x:auto; }
+        @media(max-width:768px){.container{padding:12px}.header{padding:20px 14px}}
     </style>
 </head>
 <body>
@@ -599,7 +603,7 @@
           firebase.initializeApp(firebaseConfig);
           db = firebase.firestore();
           isFirebaseConnected = true;
-          updateFirebaseStatus('connected', '🔥 מחובר ל-Firebase');
+          updateFirebaseStatus('pending', 'בודק חיבור לנתונים…');
         } catch (error) {
           console.error('שגיאה באתחול Firebase:', error);
           updateFirebaseStatus('disconnected', '❌ שגיאה בחיבור ל-Firebase');
@@ -806,6 +810,7 @@
                         .orderBy('timestamp', 'desc')
                         .get();
                         
+                    updateFirebaseStatus('connected', 'הנתונים נטענו מ-Firebase');
                     allMedications = snapshot.docs.map(doc => {
                         const data = doc.data();
                         return {
@@ -833,6 +838,7 @@
                 populateMonthSelector();
                 
             } catch (error) {
+                updateFirebaseStatus('disconnected', 'לא ניתן לטעון נתונים מהענן. הנתונים הקיימים לא נמחקו.');
                 console.error('שגיאה בטעינת נתוני תרופות:', error);
                 showMessage('medicationError', 'שגיאה בטעינת הנתונים');
             }
